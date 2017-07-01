@@ -47,6 +47,6 @@ RUN ruby -v
 # Force bash as shell
 # RUN ["/bin/bash", "-c", "echo hello all in one string"]
 
-CMD ["bash", "-l", "-c", "echo Welcome"]
+CMD ["bash", "-l"]
 
 
