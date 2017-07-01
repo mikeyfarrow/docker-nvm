@@ -15,8 +15,8 @@ RUN apt-get update \
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 6.11.0
 
-# These should already be installed...
-RUN apt-get update && apt-get install -y build-essential libssl-dev
+RUN apt-get update && apt-get install -y build-essential libssl-dev \
+	python python3 gnupg2
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
@@ -27,15 +27,23 @@ RUN source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
     && nvm use default \
-    && nvm install 8.1.3
+    && nvm install 8.1.3 \
+    && nvm use 8.1.3
 
 # add node and npm to path so the commands are available
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-# confirm installation
+# confirm installation of node
 RUN node -v
 RUN npm -v
+
+# Install RVM for Ruby
+RUN apt-add-repository -y ppa:rael-gc/rvm && \
+	apt-get update && \
+	apt-get install -y rvm
+
+RUN /bin/bash -l -c "rvm requirements"
 
 CMD ["bash"]
 
