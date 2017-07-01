@@ -16,7 +16,7 @@ ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 6.11.0
 
 RUN apt-get update && apt-get install -y build-essential libssl-dev \
-	python python3 gnupg2
+	python python3 gnupg2 software-properties-common
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
