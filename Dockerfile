@@ -16,7 +16,7 @@ ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 6.11.0
 
 # These should already be installed...
-RUN apt-get update && apt-get install build-essential libssl-dev
+RUN apt-get update && apt-get install -y build-essential libssl-dev
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
