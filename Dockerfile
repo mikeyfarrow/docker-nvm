@@ -16,7 +16,7 @@ ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 6.11.0
 
 RUN apt-get update && apt-get install -y build-essential libssl-dev \
-	python python3 gnupg2 software-properties-common
+	python python3 gnupg2
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
@@ -38,13 +38,15 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN node -v
 RUN npm -v
 
-# Install RVM for Ruby
-RUN apt-add-repository -y ppa:rael-gc/rvm && \
-	apt-get update && \
-	apt-get install -y rvm
+# install ruby
+RUN apt-get update && apt-get install -y ruby-full
 
-RUN /bin/bash -l -c "rvm requirements"
+# confirm
+RUN ruby -v
 
-CMD ["bash"]
+# Force bash as shell
+# RUN ["/bin/bash", "-c", "echo hello all in one string"]
+
+CMD ["bash", "-l", "-c", "echo Welcome"]
 
 
